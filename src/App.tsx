@@ -158,7 +158,18 @@ export default function App() {
       }
     } catch (err: any) {
       console.error('Falha no login Google:', err);
-      showToast('Não foi possível conectar com o Google: ' + (err.message || 'Tente novamente.'), 'error');
+      if (err?.code === 'auth/unauthorized-domain') {
+        showToast(
+          `Domínio "${window.location.hostname}" não autorizado no Firebase. Adicione-o em Firebase Console > Authentication > Settings > Authorized domains.`,
+          'error'
+        );
+      } else if (err?.code === 'auth/popup-closed-by-user' || err?.code === 'auth/cancelled-popup-request') {
+        showToast('Login cancelado.', 'error');
+      } else if (err?.code === 'auth/popup-blocked') {
+        showToast('O navegador bloqueou a janela de login. Permita pop-ups para este site e tente novamente.', 'error');
+      } else {
+        showToast('Não foi possível conectar com o Google: ' + (err.message || 'Tente novamente.'), 'error');
+      }
     } finally {
       setIsLoggingIn(false);
     }
