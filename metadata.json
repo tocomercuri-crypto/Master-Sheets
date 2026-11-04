@@ -1,0 +1,6 @@
+{
+  "name": "Master Diesel Center",
+  "description": "Sistema de gestão completo para laboratórios diesel: ordens de serviço (peças e serviços), controle de estoque, clientes, fluxo de caixa e relatórios mensais com integração Google Sheets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
